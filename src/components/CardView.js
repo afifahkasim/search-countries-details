@@ -3,17 +3,20 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
+import { Link } from 'react-router-dom'
 
 function CardView(props) {
     return (
         <>
-            <Container>
-                <Row xs={4} className="g-4">
+            <Container className='card-container'>
+                <Row xs={1} sm={2} md={4} className="row g-4">
                     {props.array.map((element, idx) => (
                         <Col key={idx}>
-                            <Card>
+                            <Card className='h-100'>
                                 {/* <Container className='img-container'> */}
+                                <Link to={{ pathname : "details", state: element }} key={idx}>
                                 <Card.Img variant="top" className='img' src={element.flags.png} />
+                                </Link>
                                 {/* </Container> */}
                                 <Card.Body>
                                     <Card.Title>{element.name.common}</Card.Title>

@@ -57,11 +57,14 @@ function Home() {
             <NavigationBar />
             <Container className='search-container align-items-center'>
                 <Row className='row-height'>
-                    <Col md={6} className='col-height'>
+                    <Col xs={12} md={6} className='col-1 col-height'>
                         <SearchInput placeholder="Search for a country name.." onChange={term => searchCountry(term.target.value)} />
                     </Col>
 
-                    <Col md={6} className='col-2 col-height align-items-center'>
+                    <Col xs={0} md={3} className='col-2'>
+                    </Col>
+
+                    <Col xs={12} md={3} className='col-3 col-height align-items-center'>
                             <DropdownList array={regionList} />
                             <ToggleLabel state={toggle} onChange={click => setToggle(click.target.checked)} />
                     </Col>

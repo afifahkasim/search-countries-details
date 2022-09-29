@@ -10,7 +10,7 @@ import '../index.css';
 function SearchInput(props) {
     return (
         <>
-            <Form className='search'>
+            <Form className='search align-items-center'>
                 <Container>
                     <Form.Group>
                         {/* <Form.Label>Search for a country</Form.Label> */}
