@@ -11,7 +11,7 @@ function NavigationBar() {
   return (
     <>
       <Navbar bg="light" variant="light">
-        <Container fluid>
+        <Container>
           <Navbar.Brand href="#home" className="text-left">
             <IconContext.Provider value={{ size: "3vh", className: "icon" }}><BsGlobe2 /></IconContext.Provider>
             World Countries

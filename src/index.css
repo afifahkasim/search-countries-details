@@ -174,12 +174,12 @@ code {
   font-size: 1.5vh;
 }
 
-.navbar .container-fluid {
-  padding-left: 5vw;
-  padding-right: 5vw;
+.navbar .container {
+  /* padding-left: 5vw;
+  padding-right: 5vw; */
 }
 
-.navbar .container-fluid .icon {
+.navbar .container .icon {
   margin-right: 0.8vw;
   padding-bottom: 0.2vh;
 }
