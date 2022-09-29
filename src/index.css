@@ -22,6 +22,74 @@ code {
   overflow: scroll;
 }
 
+.home .search-container .row-height {
+  height: 5vh;
+  margin-top: 5vh;
+  margin-bottom: 10vh;
+}
+
+.home .search-container .row-height .col-height {
+  height: 5vh;
+}
+
+.home .search-container .row-height .col-2.col-height {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  min-width: 393px;
+}
+
+.search {
+
+}
+
+
+.dropdown {
+  /* width: 15vw; */
+  padding-inline: 1vw;
+}
+
+#dropdown-basic-button {
+  color: black;
+  background-color: white;
+  border-color: #ced4da;
+}
+
+
+.toggle {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  /* width: 15vw; */
+}
+
+.toggle .text {
+  
+}
+
+.toggle .text.left {
+  padding-right: 0.5vw;
+}
+
+.toggle .text.right {
+  padding-left: 0.5vw;
+}
+
+
+.react-toggle--checked .react-toggle-track {
+  background-color: #4D4D4D !important;
+}
+
+.react-toggle--checked:hover:not(.react-toggle--disabled) .react-toggle-track {
+  background-color: #000000 !important;
+}
+
+.react-toggle--checked .react-toggle-thumb {
+  left: 27px;
+  border-color: #4D4D4D !important;
+}
+
+
 .card {
 	box-shadow: 6px 6px 3px rgba(0, 0, 0, 0.15);
 }
@@ -35,6 +103,44 @@ code {
 
 .card .text-bold {
   font-weight: bold;
+}
+
+.table {
+}
+
+.table .rounded-left {
+  border-top-left-radius: 15px;
+}
+
+.table .rounded-right {
+  border-top-right-radius: 15px;
+}
+
+.table .table-dark {
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.3);
+}
+
+.table .rows {
+  justify-content: center;
+  align-items: center;
+}
+
+.table .rows .currency {
+  background-color: rgba(125, 125, 125, 0.3); 
+  font-weight: bold;
+  border-radius: 5px;
+  width: auto; 
+  height: auto; 
+  padding: 0.1vh 0.2vw 0.1vh 0.2vw;
+  margin-right: 4px;
+  font-size: 16px;
+}
+
+.table .img {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 75px;
 }
 
 
@@ -61,8 +167,4 @@ code {
 }
 
 
-.search .container {
-  margin-top: 5vh;
-  margin-bottom: 5vh;
-}
 
