@@ -3,16 +3,20 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { useContext } from "react"
+import { ThemeContext } from '../styles/ThemeContext'
 
 function CardView(props) {
+    const { darkMode } = useContext(ThemeContext);
+
     return (
         <>
             <Container className='card-container'>
                 <Row xs={1} sm={2} md={4} className="row g-4">
                     {props.array.map((element, idx) => (
                         <Col key={idx}>
-                            <Card className='h-100'>
+                            <Card className={ darkMode ? 'bg-light h-100' : 'bg-dark h-100'}>
                                 {/* <Container className='img-container'> */}
                                 <Link to={`/details/${element.cca3}`} state={{ country: element }} key={idx}>
                                 <Card.Img variant="top" className='img' src={element.flags.png} />

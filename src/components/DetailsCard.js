@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import { ThemeContext } from "../styles/ThemeContext"
+
 
 function Subcard(props) {
     return (
@@ -18,8 +20,10 @@ function Subcard(props) {
 }
 
 function DetailsCard(props) {
+    const { darkMode } = useContext(ThemeContext);
+
     return (
-        <div className='details'>
+        <div className={ darkMode ? 'details' : 'details dark'}>
             <Container className="container-2">
                 <Card className="card-style">
                     <Row xs={1} md={2}>

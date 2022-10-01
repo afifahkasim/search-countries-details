@@ -3,11 +3,25 @@ import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
 import _ from "lodash";
 
+import { Link, useNavigate } from 'react-router-dom'
+import { useContext } from "react"
+import { ThemeContext } from '../styles/ThemeContext'
 
 function TableView(props) {
+    const { darkMode } = useContext(ThemeContext);
+
+    // Not working, will try to use useNavigate instead
+    const handleClick = (element, idx) => {
+        return <Link to={`/details/${element.cca3}`} state={{ country: element }} key={idx} />
+    }
+
+    // Working, state passed as well.
+    // Will leave this here for a bit for reference, need to try this for [country details --> neighbour country details] navigation
+    const navigate = useNavigate()
+
     return (
-        <Container>
-            <Table hover responsive>
+        <Container className={darkMode ? 'table' : 'table dark'}>
+            <Table hover responsive className={darkMode ? 'table-hover' : 'table-hover dark'}>
                 <thead>
                     <tr className="table-dark">
                         <th className="rounded-left"></th>
@@ -31,13 +45,14 @@ function TableView(props) {
                         const currencyList = _.keys(element.currencies)
                         const list = currencyList.map((ele) => {
                             const sym = _.get(element.currencies, [ele, 'symbol'])
-                            return (                   
-                                {name: ele, symbol: sym}
+                            return (
+                                { name: ele, symbol: sym }
                             )
                         })
 
                         return (
-                            <tr key={idx} className="rows">
+                            // <tr key={idx} className="rows" onClick={handleClick(element, idx)}>
+                            <tr key={idx} className="rows" onClick={()=>navigate(`/details/${element.cca3}`, {state: { country: element }})}>
                                 <td><img className="img" src={element.flags.png}></img></td>
                                 <td>{element.name.common}</td>
                                 <td>{element.population.toLocaleString()}</td>
@@ -49,7 +64,7 @@ function TableView(props) {
                     })}
                 </tbody>
             </Table>
-        </Container>
+        </Container >
 
     );
 }

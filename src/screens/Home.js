@@ -1,6 +1,6 @@
 // move what is in Home.js to here later
 import axios from 'axios'
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import _ from "lodash";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -14,6 +14,7 @@ import ToggleLabel from '../components/ToggleLabel.js';
 import CardView from '../components/CardView.js';
 import TableView from '../components/TableView.js';
 import DropdownList from '../components/DropdownList.js';
+import { ThemeContext } from "../styles/ThemeContext";
 
 // const url = 'https://restcountries.com/v3.1/all'
 // const url2 = 'https://restcountries.com/v3.1/name/'
@@ -28,6 +29,7 @@ import DropdownList from '../components/DropdownList.js';
 // }
 
 function Home() {
+    const { darkMode } = useContext(ThemeContext);
 
     const url = 'https://restcountries.com/v3.1/all'
     const url2 = 'https://restcountries.com/v3.1/name/'
@@ -35,8 +37,9 @@ function Home() {
 
     const [country, setCountry] = useState([])
     // const [regionList, setRegionList] = useState([])
-    const regionList = ["America", "Asia", "Africa", "Europe", "Oceania", "Antarctic"]
+    const regionList = ["All", "America", "Asia", "Africa", "Europe", "Oceania", "Antarctic"]
     const [toggle, setToggle] = useState(false)
+    const [title, setTitle] = useState("Filter by Region")
 
     const getAllCountries = async () => {
         try {
@@ -60,13 +63,18 @@ function Home() {
         await axios.get(url2 + term).then(response => setCountry(response.data));
     }
 
+
     const filterByRegion = async region => {
-        if (region === '') return
-        await axios.get(url3 + region).then(response => setCountry(response.data));
+        if (region === 'All') {
+            return await axios.get(url).then(response => setCountry(response.data))
+        }
+        else {
+            return await axios.get(url3 + region).then(response => setCountry(response.data))
+        }
     }
 
     return (
-        <div className='home'>
+        <div className={darkMode ? 'home' : 'home dark'}>
             <NavigationBar />
             <Container className='search-container align-items-center'>
                 <Row className='row-height'>
@@ -78,15 +86,18 @@ function Home() {
                     </Col>
 
                     <Col xs={12} md={3} className='col-3 col-height align-items-center'>
-                            <DropdownList array={regionList} />
-                            <ToggleLabel state={toggle} onChange={click => setToggle(click.target.checked)} />
+                        <DropdownList array={regionList} onSelect={(val) => { filterByRegion(val); setTitle(val) }} title={title} />
+                        <ToggleLabel state={toggle} onChange={click => setToggle(click.target.checked)} />
                     </Col>
                 </Row>
             </Container>
+            <Container>
+                <p>Found {country.length} countries in total</p>
+            </Container>
             {
                 toggle === false ?
-                <CardView array={country} /> :
-                <TableView array={country} />
+                    <CardView array={country} /> :
+                    <TableView array={country} />
             }
         </div>
     );

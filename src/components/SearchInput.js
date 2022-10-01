@@ -6,19 +6,21 @@ import { BsSearch } from "react-icons/bs";
 import { IconContext } from "react-icons";
 import '../index.css';
 
+import { useContext } from "react"
+import { ThemeContext } from '../styles/ThemeContext'
 
 function SearchInput(props) {
+    const { darkMode } = useContext(ThemeContext);
     return (
         <>
-            <Form className='search align-items-center'>
+            <Form className={darkMode ? 'search align-items-center' : 'search align-items-center dark'}>
                 <Container>
                     <Form.Group>
-                        {/* <Form.Label>Search for a country</Form.Label> */}
                         <InputGroup>
-                                <InputGroup.Text>
-                                    <IconContext.Provider value={{ size: "2vh", className: "icon" }}><BsSearch /></IconContext.Provider>
-                                </InputGroup.Text>
-                            <Form.Control type="email" placeholder={props.placeholder} onChange={props.onChange} />
+                            <InputGroup.Text>
+                                <IconContext.Provider value={{ size: "2vh", className: "icon" }}><BsSearch /></IconContext.Provider>
+                            </InputGroup.Text>
+                            <Form.Control type="text" placeholder={props.placeholder} onChange={props.onChange} />
                         </InputGroup>
                     </Form.Group>
                 </Container>

@@ -3,7 +3,7 @@ import Details from "./screens/Details.js";
 import Home from "./screens/Home.js";
 
 function App() {
-
+  
   return (
       <Router>
         <Routes>

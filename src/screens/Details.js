@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate, useLocation, useParams } from 'react-router'
 import _ from "lodash";
 import axios from 'axios'
 import fetch from "isomorphic-unfetch";
 import { getAllCountries } from "./Home"
+import { ThemeContext } from '../styles/ThemeContext'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
@@ -17,6 +18,8 @@ import DetailsCard from "../components/DetailsCard";
 
 
 function Details() {
+    const { darkMode } = useContext(ThemeContext);
+
     let params = useParams()
     let { state } = useLocation()
     let navigate = useNavigate()
@@ -31,8 +34,8 @@ function Details() {
         try {
             await axios.get(url + id).then(response => {
                 setCountry(response.data[0])
-                console.log(response.data)
-                console.log("Above was from getOneCountry")
+                // console.log(response.data)
+                // console.log("Above was from getOneCountry")
             });
         } catch (error) {
             console.error(error);
@@ -50,13 +53,13 @@ function Details() {
 
     useEffect(() => {
         const getBorders = async () => {
-          const borders = await Promise.all(
-            country.borders.map((border) => getOneCountry(border))
-          );
-          setBorders(borders);
+            const borders = await Promise.all(
+                country.borders.map((border) => getOneCountry(border))
+            );
+            setBorders(borders);
         };
         getBorders();
-      }, [navLink]);
+    }, []);
 
     // useEffect(() => {
     //     getOneCountry(params.countryId);
@@ -83,10 +86,11 @@ function Details() {
 
     console.log(country)
     console.log("heLlo" + country + "Test" + state)
+    console.log(borders)
     // console.log(state)
 
     return (
-        <div className='details'>
+        <div className={darkMode ? 'details' : 'details dark'}>
             <NavigationBar />
 
             <DetailsHeader officialName={state.country.name.official} commonName={state.country.name.common} />
@@ -107,29 +111,29 @@ function Details() {
                 capital={state.country.capital.join(', ')}
             />
 
-            {Object.hasOwn(state.country, 'borders') ?
-                <Container className="container-3">
+            <Container className="container-3">
+                {Object.hasOwn(state.country, 'borders') ?
                     <Card className="card-style">
                         <div className="below-card">
                             <p>Neighbouring countries </p>
                             {state.country.borders.map((element, idx) => {
                                 return (
-                                        <div className="btn btn-secondary btn-sm" key={element}
-                                            onClick={() => {
-                                                // setNavLink(`/details/${element}`)
-                                                // navigate(navLink)
-                                                // getOneCountry(element)
-                                            }}>
-                                            {element}
-                                        </div>
+                                    <div className="btn btn-secondary btn-sm" key={element}
+                                        onClick={() => {
+                                            // navigate(`/details/${element.cca3}`, {state: { country: element }})
+                                            // setNavLink(`/details/${element}`)
+                                            // navigate(navLink)
+                                            // getOneCountry(element)
+                                        }}>
+                                        {element}
+                                    </div>
                                 )
                             })}
                         </div>
                     </Card>
-                </Container>
-                : <></>
-            }
-
+                    : <></>
+                }
+            </Container>
 
         </div >
     );
