@@ -218,4 +218,129 @@ code {
 }
 
 
+.details {
 
+}
+
+.details .container-1 {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+  background: rgb(92, 92, 92);
+  padding: 12vh 0px;
+}
+
+.details .container-1 .text {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+  padding-left: 16vw;
+  padding-right: 16vw;
+  position: relative;
+  z-index: 1;
+  color: white;
+
+}
+
+.details .container-1 h1 {
+  font-weight: bold;
+}
+
+.details .container-1 .sub{
+  color: rgb(213, 213, 213);
+}
+
+.details .container-2 {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+  background: transparent;
+  padding: 11vh 0px;
+}
+
+.details .container-2 .card-style {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 70vw;
+  padding: 15px 1rem;
+  position: relative;
+  margin-top: -20vh;
+}
+
+.details .container-2 .subcard-style {
+  border-radius: 3px !important;
+  box-shadow: 0px 0px 0px 0px !important;
+  margin-bottom: 1vh;
+}
+
+.details .container-2 .subcard-style .title {
+  font-size: 14px;
+  letter-spacing: 1px;
+  color:rgb(92, 92, 92, 0.8);
+  text-transform: uppercase;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.details .container-2 .subcard-style .subtitle {
+  font-weight: bold;
+}
+
+.details .container-2 .card-style .below-card {
+  padding: 15px;
+}
+
+.details .container-2 .card-style .below-card p {
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color:rgb(92, 92, 92);
+  text-transform: uppercase;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.details .container-2 .card-style .below-card .btn {
+  margin-top: 0.3vh;
+  margin-right: 0.3vw;
+}
+
+.details .container-3 {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+  background: transparent;
+  padding: 11vh 0px;
+}
+
+.details .container-3 .card-style {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 70vw;
+  padding: 15px 1rem;
+  position: relative;
+  margin-top: -20vh;
+}
+
+.details .container-3 .card-style .below-card {
+  height: 100%;
+  padding: 15px;
+}
+
+.details .container-3 .card-style .below-card p {
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color:rgb(92, 92, 92);
+  text-transform: uppercase;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.details .container-3 .card-style .below-card .btn {
+  margin-top: 0.3vh;
+  margin-right: 0.3vw;
+}

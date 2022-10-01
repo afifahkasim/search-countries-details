@@ -6,13 +6,12 @@ import '../index.css';
 import { BsGlobe2, BsMoonStarsFill } from "react-icons/bs";
 import { IconContext } from "react-icons";
 
-
 function NavigationBar() {
   return (
     <>
       <Navbar bg="light" variant="light">
         <Container>
-          <Navbar.Brand href="#home" className="text-left">
+          <Navbar.Brand href="/" className="text-left">
             <IconContext.Provider value={{ size: "3vh", className: "icon" }}><BsGlobe2 /></IconContext.Provider>
             World Countries
           </Navbar.Brand>

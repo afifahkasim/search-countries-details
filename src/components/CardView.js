@@ -14,7 +14,7 @@ function CardView(props) {
                         <Col key={idx}>
                             <Card className='h-100'>
                                 {/* <Container className='img-container'> */}
-                                <Link to={{ pathname : "details", state: element }} key={idx}>
+                                <Link to={`/details/${element.cca3}`} state={{ country: element }} key={idx}>
                                 <Card.Img variant="top" className='img' src={element.flags.png} />
                                 </Link>
                                 {/* </Container> */}

@@ -15,6 +15,18 @@ import CardView from '../components/CardView.js';
 import TableView from '../components/TableView.js';
 import DropdownList from '../components/DropdownList.js';
 
+// const url = 'https://restcountries.com/v3.1/all'
+// const url2 = 'https://restcountries.com/v3.1/name/'
+// const url3 = 'https://restcountries.com/v3.1/region/'
+
+// const getAllCountries = async (countries) => {
+//     try {
+//         await axios.get(url).then(response => { countries(response.data) });
+//     } catch (error) {
+//         console.error(error);
+//     }
+// }
+
 function Home() {
 
     const url = 'https://restcountries.com/v3.1/all'
@@ -39,7 +51,8 @@ function Home() {
     }
 
     useEffect(() => {
-        getAllCountries();
+        getAllCountries()
+        // getAllCountries(setCountry)
     }, [])
 
     const searchCountry = async term => {
@@ -80,3 +93,4 @@ function Home() {
 }
 
 export default Home;
+// export {getAllCountries}
