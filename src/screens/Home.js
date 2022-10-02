@@ -1,7 +1,6 @@
 // move what is in Home.js to here later
 import axios from 'axios'
 import React, { useState, useEffect, useContext } from 'react';
-import _ from "lodash";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
@@ -38,7 +37,7 @@ function Home() {
     const [country, setCountry] = useState([])
     // const [regionList, setRegionList] = useState([])
     const regionList = ["All", "America", "Asia", "Africa", "Europe", "Oceania", "Antarctic"]
-    const [toggle, setToggle] = useState(false)
+    const [toggle, setToggle] = useState(JSON.parse(localStorage.getItem("TOGGLE_VIEW")))
     const [title, setTitle] = useState("Filter by Region")
 
     const getAllCountries = async () => {
@@ -57,6 +56,10 @@ function Home() {
         getAllCountries()
         // getAllCountries(setCountry)
     }, [])
+    
+    useEffect(() => {
+    localStorage.setItem("TOGGLE_VIEW", toggle);
+    }, [toggle]);
 
     const searchCountry = async term => {
         if (term.length < 3 || term === '') return

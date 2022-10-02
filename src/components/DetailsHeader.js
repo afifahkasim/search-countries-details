@@ -15,8 +15,8 @@ function DetailsHeader(props) {
                 <Container className="text">
                     <h1>{props.officialName}</h1>
                     <a href="/" className="sub">Countries</a>
-                    <a> <IconContext.Provider value={{ size: "3vh", className: "icon" }}><MdOutlineArrowRight /></IconContext.Provider> </a>
-                    <a>{props.commonName}</a>
+                    <span> <IconContext.Provider value={{ size: "3vh", className: "icon" }}><MdOutlineArrowRight /></IconContext.Provider> </span>
+                    <span>{props.commonName}</span>
                 </Container>
             </Container>
         </div>
