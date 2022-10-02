@@ -6,6 +6,7 @@ import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
 import { useContext } from "react"
 import { ThemeContext } from '../styles/ThemeContext'
+import SortArrow from './SortArrow'
 
 function CardView(props) {
     const { darkMode } = useContext(ThemeContext);
@@ -13,13 +14,17 @@ function CardView(props) {
     return (
         <>
             <Container className='card-container'>
+                <div className='sort'>
+                    <span>Country</span>
+                    <span>Population</span>
+                </div>
                 <Row xs={1} sm={2} md={4} className="row g-4">
                     {props.array.map((element, idx) => (
                         <Col key={idx}>
-                            <Card className={ darkMode ? 'bg-light h-100' : 'bg-dark h-100'}>
+                            <Card className={darkMode ? 'bg-light h-100' : 'bg-dark h-100'}>
                                 {/* <Container className='img-container'> */}
                                 <Link to={`/details/${element.cca3}`} state={{ country: element }} key={idx}>
-                                <Card.Img variant="top" className='img' src={element.flags.png} />
+                                    <Card.Img variant="top" className='img' src={element.flags.png} />
                                 </Link>
                                 {/* </Container> */}
                                 <Card.Body>

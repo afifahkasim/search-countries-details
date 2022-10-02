@@ -1,14 +1,17 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
-import _ from "lodash";
+import SortArrow from './SortArrow'
 
+import _ from "lodash";
 import { Link, useNavigate } from 'react-router-dom'
-import { useContext } from "react"
+import { useContext, useState, useEffect } from "react"
 import { ThemeContext } from '../styles/ThemeContext'
 
 function TableView(props) {
     const { darkMode } = useContext(ThemeContext);
+
+    const headerColumn = ['', 'Country', 'Population', 'Region', 'Capital', 'Currency']
 
     // Not working, will try to use useNavigate instead
     const handleClick = (element, idx) => {
@@ -24,12 +27,14 @@ function TableView(props) {
             <Table hover responsive className={darkMode ? 'table-hover' : 'table-hover dark'}>
                 <thead>
                     <tr className="table-dark">
-                        <th className="rounded-left"></th>
-                        <th>Country</th>
-                        <th>Population</th>
-                        <th>Region</th>
-                        <th>Capital</th>
-                        <th className="rounded-right">Currency</th>
+                        {headerColumn.map((element, idx) => {
+                            if (idx === 0) // First column
+                                return <th className="rounded-left" key={idx}>{element}</th>
+                            else if (idx === headerColumn.length - 1) // Last column
+                                return <th className="rounded-right" key={idx}>{element}</th>
+                            else
+                                return <th key={idx} onClick={props.onClickHeader}>{element}<SortArrow direction={props.direction} /></th>
+                        })}
                     </tr>
                 </thead>
                 <tbody className='align-middle'>
@@ -52,7 +57,7 @@ function TableView(props) {
 
                         return (
                             // <tr key={idx} className="rows" onClick={handleClick(element, idx)}>
-                            <tr key={idx} className="rows" onClick={()=>navigate(`/details/${element.cca3}`, {state: { country: element }})}>
+                            <tr key={idx} className="rows" onClick={() => navigate(`/details/${element.cca3}`, { state: { country: element } })}>
                                 <td><img className="img" src={element.flags.png}></img></td>
                                 <td>{element.name.common}</td>
                                 <td>{element.population.toLocaleString()}</td>

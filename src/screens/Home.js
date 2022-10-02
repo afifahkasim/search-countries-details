@@ -1,6 +1,7 @@
 // move what is in Home.js to here later
 import axios from 'axios'
 import React, { useState, useEffect, useContext } from 'react';
+import _ from "lodash";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
@@ -39,6 +40,8 @@ function Home() {
     const regionList = ["All", "America", "Asia", "Africa", "Europe", "Oceania", "Antarctic"]
     const [toggle, setToggle] = useState(JSON.parse(localStorage.getItem("TOGGLE_VIEW")))
     const [title, setTitle] = useState("Filter by Region")
+    const [direction, setDirection] = useState(null)
+    const [selectedColumn, setSelectedColumn] = useState(null)
 
     const getAllCountries = async () => {
         try {
@@ -56,9 +59,9 @@ function Home() {
         getAllCountries()
         // getAllCountries(setCountry)
     }, [])
-    
+
     useEffect(() => {
-    localStorage.setItem("TOGGLE_VIEW", toggle);
+        localStorage.setItem("TOGGLE_VIEW", toggle);
     }, [toggle]);
 
     const searchCountry = async term => {
@@ -76,6 +79,16 @@ function Home() {
         }
     }
 
+    const sortTable = (column) => {
+        const newDirection = direction === "desc" ? "asc" : "desc"
+        const sortedData = _.orderBy(country, [column], [newDirection])
+
+        setSelectedColumn(column)
+        setDirection(newDirection)
+        setCountry(sortedData)
+        console.log(sortedData)
+    }
+
     return (
         <div className={darkMode ? 'home' : 'home dark'}>
             <NavigationBar />
@@ -85,22 +98,34 @@ function Home() {
                         <SearchInput placeholder="Search for a country name.." onChange={term => searchCountry(term.target.value)} />
                     </Col>
 
-                    <Col xs={0} md={3} className='col-2'>
+                    {/* <Col xs={0} md={1} className='col-2'>
+                    </Col> */}
+
+                    <Col xs={6} md={4} className='col-2'>
+                        <DropdownList array={regionList} onSelect={(val) => { filterByRegion(val); setTitle(val) }} title={title} />
                     </Col>
 
-                    <Col xs={12} md={3} className='col-3 col-height align-items-center'>
+
+                    <Col xs={6} md={2} className='col-3'>
+                        <ToggleLabel state={toggle} onChange={click => setToggle(click.target.checked)} />
+
+                    </Col>
+
+                    {/* <Col xs={12} md={3} className='col-3 col-height align-items-center'>
                         <DropdownList array={regionList} onSelect={(val) => { filterByRegion(val); setTitle(val) }} title={title} />
                         <ToggleLabel state={toggle} onChange={click => setToggle(click.target.checked)} />
-                    </Col>
+                    </Col> */}
                 </Row>
             </Container>
+
             <Container>
                 <p>Found {country.length} countries in total</p>
             </Container>
+
             {
                 toggle === false ?
                     <CardView array={country} /> :
-                    <TableView array={country} />
+                    <TableView array={country} direction={direction} onClickHeader={(val) => { console.log(val); val.target.innerText === "Country" ? sortTable('name.common') : sortTable(val.target.innerText.toLowerCase()) }} />
             }
         </div>
     );

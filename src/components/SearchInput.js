@@ -13,7 +13,7 @@ function SearchInput(props) {
     const { darkMode } = useContext(ThemeContext);
     return (
         <>
-            <Form className={darkMode ? 'search align-items-center' : 'search align-items-center dark'}>
+            <Form className={darkMode ? 'search' : 'search dark'}>
                 <Container>
                     <Form.Group>
                         <InputGroup>

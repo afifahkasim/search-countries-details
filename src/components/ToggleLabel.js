@@ -13,7 +13,7 @@ function ToggleLabel(props) {
     // const [toggle, setToggle] = useState(false)
 
     return (
-        <div className='toggle'>
+        <div className='toggle align-items-center'>
             <span className='text left'>Card</span>
             {/* <Toggle checked={toggle} icons={false} onChange={click => setToggle(click.target.checked)} /> */}
             <Toggle checked={props.state} icons={false} onChange={props.onChange} />

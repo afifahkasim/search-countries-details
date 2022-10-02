@@ -24,11 +24,12 @@ function Details() {
     let { state } = useLocation()
     let navigate = useNavigate()
 
-    console.log(state.country.cca3)
+    console.log(state)
+
     const url = 'https://restcountries.com/v3.1/alpha/'
     const [country, setCountry] = useState(state.country)
     const [borders, setBorders] = useState([])
-    const [navLink, setNavLink] = useState(`/details/${state.country.cca3}`);
+    const [navLink, setNavLink] = useState();
 
     const getOneCountry = async (id) => {
         try {
@@ -42,24 +43,31 @@ function Details() {
         }
     }
 
+    const [bordersData, setBordersData] = useState([])
     const getCountry = async (id) => {
-        const data = await axios.get(url + id).data
-        console.log(data)
-        console.log("Above was from getCountry")
-        return data
+        try {
+            await axios.get(url + id).then(response => {
+                bordersData.push(response.data[0])
+            });
+        } catch (error) {
+            console.error(error);
+        }
     }
+
+    const getBorder = async (arr) => {
+        return await Promise.all(arr.borders.map(e => getCountry(e)))
+    }
+
 
     console.log(params)
 
+    console.log(navLink)
+    console.log("navLnk before useEffect")
     useEffect(() => {
-        const getBorders = async () => {
-            const borders = await Promise.all(
-                country.borders.map((border) => getOneCountry(border))
-            );
-            setBorders(borders);
-        };
-        getBorders();
-    }, []);
+        console.log(navLink)
+        getBorder(country)
+        // country.borders.map((border) => getCountry(border))
+    }, [navLink]);
 
     // useEffect(() => {
     //     getOneCountry(params.countryId);
@@ -87,6 +95,7 @@ function Details() {
     console.log(country)
     console.log("heLlo" + country + "Test" + state)
     console.log(borders)
+    console.log(bordersData)
     // console.log(state)
 
     return (
@@ -117,11 +126,16 @@ function Details() {
                         <div className="below-card">
                             <p>Neighbouring countries </p>
                             {state.country.borders.map((element, idx) => {
+                                const borderCountry = bordersData[_.findLastIndex(bordersData, {cca3: element})]
+                                console.log("Container 3")
+                                console.log(borderCountry)
+
                                 return (
+                                    // some const = array where bordersData[n].cca3 = element
                                     <div className="btn btn-secondary btn-sm" key={element}
                                         onClick={() => {
-                                            // navigate(`/details/${element.cca3}`, {state: { country: element }})
-                                            // setNavLink(`/details/${element}`)
+                                            navigate(`/details/${element}`, {state: { country: borderCountry }})
+                                            setNavLink(`/details/${element}`)
                                             // navigate(navLink)
                                             // getOneCountry(element)
                                         }}>
