@@ -3,14 +3,14 @@ import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
 import SortArrow from './SortArrow'
 
-import _ from "lodash";
+import _, { isNull } from "lodash";
 import { Link, useNavigate } from 'react-router-dom'
 import { useContext, useState, useEffect } from "react"
 import { ThemeContext } from '../styles/ThemeContext'
 
 function TableView(props) {
     const { darkMode } = useContext(ThemeContext);
-
+    const initialDirection = null
     const headerColumn = ['', 'Country', 'Population', 'Region', 'Capital', 'Currency']
 
     // Not working, will try to use useNavigate instead
@@ -24,6 +24,9 @@ function TableView(props) {
 
     return (
         <Container className={darkMode ? 'table' : 'table dark'}>
+            <Container className='sort-container'>
+                <p>Found {props.array.length} countries</p>
+            </Container>
             <Table hover responsive className={darkMode ? 'table-hover' : 'table-hover dark'}>
                 <thead>
                     <tr className="table-dark">
@@ -33,7 +36,9 @@ function TableView(props) {
                             else if (idx === headerColumn.length - 1) // Last column
                                 return <th className="rounded-right" key={idx}>{element}</th>
                             else
-                                return <th key={idx} onClick={props.onClickHeader}>{element}<SortArrow direction={props.direction} /></th>
+                                return <th key={idx} style={{cursor: 'pointer'}} onClick={props.onClickHeader}>{element}
+                                {(props.selectedColumn === null || props.selectedColumn !== element) && <SortArrow direction={null} />} 
+                                {props.selectedColumn === element && <SortArrow direction={props.direction} />}</th>
                         })}
                     </tr>
                 </thead>

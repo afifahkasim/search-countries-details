@@ -14,10 +14,18 @@ function CardView(props) {
     return (
         <>
             <Container className='card-container'>
-                <div className='sort'>
-                    <span>Country</span>
-                    <span>Population</span>
-                </div>
+                <Container className='sort-container'>
+                    <p>Found {props.array.length} countries</p>
+                    <div className='sort'>
+                        <span onClick={props.onClickSort}>Country
+                        {(props.selectedColumn === null || props.selectedColumn !== 'Country') && <SortArrow direction={null} />}
+                        {props.selectedColumn === 'Country' && <SortArrow direction={props.direction} />}
+                        </span>
+                        <span onClick={props.onClickSort}>Population
+                        {(props.selectedColumn === null || props.selectedColumn !== 'Population') && <SortArrow direction={null} />}
+                        {props.selectedColumn === 'Population' && <SortArrow direction={props.direction} />}</span>
+                    </div>
+                </Container>
                 <Row xs={1} sm={2} md={4} className="row g-4">
                     {props.array.map((element, idx) => (
                         <Col key={idx}>

@@ -16,12 +16,14 @@
   bottom: 0;
   left: 0;
   background-color: var(--light-mode-bg);
+  transition: background .15s ease-in-out;
   overflow: scroll;
 }
 
 .home.dark {
   background-color: var(--dark-mode-bg);
   color: white;
+  transition: background .15s ease-in-out;
 }
 
 .home .search-container .row-height {
@@ -81,16 +83,20 @@
 .search .input-group-text {
   background-color: #FFFFFF !important;
   border: 0px !important;
+  transition: background .15s ease-in-out;
+
 }
 
 .search.dark .input-group-text {
   background-color: var(--dark-mode-elements) !important;
   border: 0px !important;
-  color: var(--dark-mode-elements-2)
+  color: var(--dark-mode-elements-2);
+  transition: background .15s ease-in-out;
 }
 
 .search .form-control {
   border: 0px !important;
+  transition: background .15s ease-in-out;
 }
 
 .search.dark .form-control:focus {
@@ -100,6 +106,8 @@
 .search.dark .form-control {
   background-color: var(--dark-mode-elements) !important;
   color: white;
+  transition: background .15s ease-in-out;
+
 }
 
 .search .form-control .dark label,
@@ -246,27 +254,48 @@ p {}
   border-color: #4D4D4D !important;
 }
 
-
-.card-container .sort {
+.sort-container {
   display: flex;
-  justify-content: flex-end;
+  height: 5vh;
+  margin: 0.5vh;
 }
 
-.card-container .sort span {
+.sort-container p {
+  font-size: 1.5vh;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.sort-container .sort {
+  display: flex;
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.sort-container .sort span {
+  display: flex;
   font-size: 1.5vh;
   background-color: rgba(77, 77, 77, 0.5);
-  padding: 1vh;
-  margin: 1vh;
+  padding: 0.5vmax;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 0.5vw;
+  margin-right: 0.5vw;
   border-radius: 10px;
+}
+
+.sort-container .sort svg {
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .card {
   box-shadow: 6px 6px 3px rgba(0, 0, 0, 0.15);
-
 }
 
 .card.bg-dark {
   background-color: var(--dark-mode-elements) !important;
+  transition: background .15s ease-in-out;
 }
 
 .card .img {
@@ -290,7 +319,45 @@ p {}
 
 .table {}
 
+.table .sort-container {
+  color: black;
+  display: flex;
+  font-size: 1.5vh;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 0.5vh;
+  margin: 1vh;
+}
+
+.table.dark .sort-container {
+  color: white;
+}
+
+/* .sort-container p {
+  font-size: 1.5vh;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.sort-container .sort {
+  display: flex;
+  margin-left: auto;
+}
+
+.sort-container .sort span {
+  display: flex;
+  font-size: 1.5vh;
+  background-color: rgba(77, 77, 77, 0.5);
+  padding: 0.5vh;
+  margin: 1vh;
+  border-radius: 10px;
+} */
+
 .table.dark {}
+
+.table .rows {
+  transition: background .15s ease-in-out;
+}
 
 .table.dark .rows {
   color: white;
@@ -299,6 +366,8 @@ p {}
   align-items: center;
   border-bottom: var(--dark-mode-elements-1);
   cursor: pointer;
+  transition: background .15s ease-in-out;
+
 }
 
 .table.dark .img {
@@ -376,11 +445,14 @@ p {}
 
 .navbar {
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
+  transition: background .15s ease-in-out;
 }
 
 .navbar-dark {
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
   background-color: var(--dark-mode-elements);
+  transition: background .15s ease-in-out;
+
 }
 
 
@@ -404,11 +476,14 @@ p {}
 }
 
 
-.details {}
+.details {
+  transition: background .15s ease-in-out;
+}
 
 .details.dark {
   background-color: var(--dark-mode-elements);
   color: white;
+  transition: background .15s ease-in-out;
 }
 
 .details.dark .subcard-style,
@@ -416,10 +491,14 @@ p {}
   background-color: var(--dark-mode-elements-1);
   /* border-color: var(--dark-mode-elements-2); */
   box-shadow: 6px 6px 3px rgba(0, 0, 0, 0.3);
+  transition: background .15s ease-in-out;
+
 }
 
 .details.dark .subcard-style {
   border-color: var(--dark-mode-elements-2);
+  transition: background .15s ease-in-out;
+
 }
 
 .details.dark .card .img {
@@ -454,6 +533,7 @@ p {}
   background: var(--dark-mode-bg);
   /* background: rgb(92, 92, 92); */
   padding: 12vh 0px;
+  transition: background .15s ease-in-out;
 }
 
 .details .container-1 .text {

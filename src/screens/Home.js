@@ -14,6 +14,7 @@ import ToggleLabel from '../components/ToggleLabel.js';
 import CardView from '../components/CardView.js';
 import TableView from '../components/TableView.js';
 import DropdownList from '../components/DropdownList.js';
+import SortArrow from '../components/SortArrow'
 import { ThemeContext } from "../styles/ThemeContext";
 
 // const url = 'https://restcountries.com/v3.1/all'
@@ -36,7 +37,7 @@ function Home() {
     const url3 = 'https://restcountries.com/v3.1/region/'
 
     const [country, setCountry] = useState([])
-    // const [regionList, setRegionList] = useState([])
+    // const [regionList, setRegionList] = useState([]) //TODO: Dynamic dropdown choices
     const regionList = ["All", "America", "Asia", "Africa", "Europe", "Oceania", "Antarctic"]
     const [toggle, setToggle] = useState(JSON.parse(localStorage.getItem("TOGGLE_VIEW")))
     const [title, setTitle] = useState("Filter by Region")
@@ -69,7 +70,6 @@ function Home() {
         await axios.get(url2 + term).then(response => setCountry(response.data));
     }
 
-
     const filterByRegion = async region => {
         if (region === 'All') {
             return await axios.get(url).then(response => setCountry(response.data))
@@ -83,10 +83,8 @@ function Home() {
         const newDirection = direction === "desc" ? "asc" : "desc"
         const sortedData = _.orderBy(country, [column], [newDirection])
 
-        setSelectedColumn(column)
         setDirection(newDirection)
         setCountry(sortedData)
-        console.log(sortedData)
     }
 
     return (
@@ -98,7 +96,7 @@ function Home() {
                         <SearchInput placeholder="Search for a country name.." onChange={term => searchCountry(term.target.value)} />
                     </Col>
 
-                    {/* <Col xs={0} md={1} className='col-2'>
+                    {/* <Col xs={0} md={2} className='col-2'>
                     </Col> */}
 
                     <Col xs={6} md={4} className='col-2'>
@@ -111,21 +109,33 @@ function Home() {
 
                     </Col>
 
-                    {/* <Col xs={12} md={3} className='col-3 col-height align-items-center'>
+                    {/* <Col xs={12} md={6} className='col-3 col-height align-items-center'>
                         <DropdownList array={regionList} onSelect={(val) => { filterByRegion(val); setTitle(val) }} title={title} />
                         <ToggleLabel state={toggle} onChange={click => setToggle(click.target.checked)} />
                     </Col> */}
                 </Row>
             </Container>
 
-            <Container>
+            {/* <Container className='sort-container'>
                 <p>Found {country.length} countries in total</p>
-            </Container>
+                <div className='sort'>
+                    <span onClick={() => { sortTable(country.name.common) }}>Country<SortArrow direction={direction} /></span>
+                    <span onClick={() => { sortTable(country.population) }}>Population<SortArrow direction={direction} /></span>
+                </div>
+            </Container> */}
 
             {
                 toggle === false ?
-                    <CardView array={country} /> :
-                    <TableView array={country} direction={direction} onClickHeader={(val) => { console.log(val); val.target.innerText === "Country" ? sortTable('name.common') : sortTable(val.target.innerText.toLowerCase()) }} />
+                    <CardView array={country} direction={direction} 
+                    onClickSort={(val) => { 
+                        setSelectedColumn(val.target.innerText);
+                        val.target.innerText === "Country" ? sortTable('name.common') : sortTable(val.target.innerText.toLowerCase()) }}
+                    selectedColumn={selectedColumn} /> :
+                    <TableView array={country} direction={direction} 
+                    onClickHeader={ (val) => { 
+                        setSelectedColumn(val.target.innerText);
+                        val.target.innerText === "Country" ? sortTable('name.common') : sortTable(val.target.innerText.toLowerCase()) }} 
+                    selectedColumn={selectedColumn}/>
             }
         </div>
     );
