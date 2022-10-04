@@ -35,7 +35,8 @@ function Home() {
     const getAllCountries = async () => {
         try {
             await axios.get(url).then(response => {
-                setCountry(response.data)
+                const sortedData = _.orderBy(response.data, ['name.common'], ['asc'])
+                setCountry(sortedData)
 
                 // if (response.data.status === 404) {
                 //     setCountry([])
