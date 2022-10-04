@@ -27,6 +27,8 @@ function Details() {
     const [navLink, setNavLink] = useState();
     const [bordersData, setBordersData] = useState([])
 
+    document.title="World Countries: " + country.name.common + " Details"
+
     const getCountry = async (id) => {
         try {
             await axios.get(url + id).then(response => {
@@ -84,14 +86,14 @@ function Details() {
                 commonName={country.name.common}
                 img={country.flags.png}
                 borders={country.borders}
-                nativeName={getNestedValue(country.name.nativeName, 'official').slice(0, 3).join(', ')}
+                nativeName={Object.hasOwn(country.name, 'nativeName') && getNestedValue(country.name.nativeName, 'official').slice(0, 3).join(', ')}
                 population={country.population.toLocaleString()}
                 region={country.region}
                 subRegion={country.subregion}
-                tld={country.tld.join(', ')}
-                currencies={getNestedValue(country.currencies, 'name').join(', ')}
-                language={_.values(country.languages).join(', ')}
-                capital={country.capital.join(', ')}
+                tld={Object.hasOwn(country, 'tld') && country.tld.join(', ')}
+                currencies={Object.hasOwn(country, 'currencies') && getNestedValue(country.currencies, 'name').join(', ')}
+                language={Object.hasOwn(country, 'language') && _.values(country.languages).join(', ')}
+                capital={Object.hasOwn(country, 'capital') && country.capital.join(', ')}
             />
 
             <Container className="container-3">
