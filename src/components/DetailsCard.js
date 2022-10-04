@@ -32,21 +32,8 @@ function DetailsCard(props) {
                                 <Card.Img variant="top" className='img' src={props.img} />
                                 <Card.Body><strong>National Flag of {props.commonName}</strong></Card.Body>
                             </Card>
-                            {/* {Object.hasOwn(props.country, 'borders') ?
-                                <div className="below-card">
-                                    <p>Neighbouring countries: </p>
-                                    {props.borders.map((element, idx) => {
-                                        return (
-                                            <div className="btn btn-secondary btn-sm" key={element}
-                                            onClick={() => {
-                                                
-                                            }}>
-                                                {element}
-                                            </div>
-                                        )
-                                    })}
-                                </div> : <></>} */}
                         </Col>
+                        
                         <Col md={7}>
                             <Row>
                                 <Col>

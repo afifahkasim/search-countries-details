@@ -3,20 +3,14 @@ import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
 import SortArrow from './SortArrow'
 
-import _, { isNull } from "lodash";
-import { Link, useNavigate } from 'react-router-dom'
-import { useContext, useState, useEffect } from "react"
+import _ from "lodash";
+import { useNavigate } from 'react-router-dom'
+import { useContext } from "react"
 import { ThemeContext } from '../styles/ThemeContext'
 
 function TableView(props) {
     const { darkMode } = useContext(ThemeContext);
-    const initialDirection = null
     const headerColumn = ['', 'Country', 'Population', 'Region', 'Capital', 'Currency']
-
-    // Not working, will try to use useNavigate instead
-    const handleClick = (element, idx) => {
-        return <Link to={`/details/${element.cca3}`} state={{ country: element }} key={idx} />
-    }
 
     // Working, state passed as well.
     // Will leave this here for a bit for reference, need to try this for [country details --> neighbour country details] navigation
@@ -63,7 +57,7 @@ function TableView(props) {
                         return (
                             // <tr key={idx} className="rows" onClick={handleClick(element, idx)}>
                             <tr key={idx} className="rows" onClick={() => navigate(`/details/${element.cca3}`, { state: { country: element } })}>
-                                <td><img className="img" src={element.flags.png}></img></td>
+                                <td><img className="img" alt={`National Flag for ${element}`} src={element.flags.png}></img></td>
                                 <td>{element.name.common}</td>
                                 <td>{element.population.toLocaleString()}</td>
                                 <td>{element.region}</td>

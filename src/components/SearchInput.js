@@ -20,7 +20,7 @@ function SearchInput(props) {
                             <InputGroup.Text>
                                 <IconContext.Provider value={{ size: "2vh", className: "icon" }}><BsSearch /></IconContext.Provider>
                             </InputGroup.Text>
-                            <Form.Control type="text" placeholder={props.placeholder} onChange={props.onChange} />
+                            <Form.Control type="text" placeholder={props.placeholder} onChange={props.onChange}/>
                         </InputGroup>
                     </Form.Group>
                 </Container>

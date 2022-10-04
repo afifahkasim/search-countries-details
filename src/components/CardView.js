@@ -11,6 +11,8 @@ import SortArrow from './SortArrow'
 function CardView(props) {
     const { darkMode } = useContext(ThemeContext);
 
+    // const noCountries = props.array.status || props.array.message; //TODO: Display 0 data when props.array.status === 404
+
     return (
         <>
             <Container className='card-container'>
@@ -18,36 +20,37 @@ function CardView(props) {
                     <p>Found {props.array.length} countries</p>
                     <div className='sort'>
                         <span onClick={props.onClickSort}>Country
-                        {(props.selectedColumn === null || props.selectedColumn !== 'Country') && <SortArrow direction={null} />}
-                        {props.selectedColumn === 'Country' && <SortArrow direction={props.direction} />}
+                            {(props.selectedColumn === null || props.selectedColumn !== 'Country') && <SortArrow direction={null} />}
+                            {props.selectedColumn === 'Country' && <SortArrow direction={props.direction} />}
                         </span>
                         <span onClick={props.onClickSort}>Population
-                        {(props.selectedColumn === null || props.selectedColumn !== 'Population') && <SortArrow direction={null} />}
-                        {props.selectedColumn === 'Population' && <SortArrow direction={props.direction} />}</span>
+                            {(props.selectedColumn === null || props.selectedColumn !== 'Population') && <SortArrow direction={null} />}
+                            {props.selectedColumn === 'Population' && <SortArrow direction={props.direction} />}</span>
                     </div>
                 </Container>
                 <Row xs={1} sm={2} md={4} className="row g-4">
                     {props.array.map((element, idx) => (
                         <Col key={idx}>
-                            <Card className={darkMode ? 'bg-light h-100' : 'bg-dark h-100'}>
-                                {/* <Container className='img-container'> */}
-                                <Link to={`/details/${element.cca3}`} state={{ country: element }} key={idx}>
+                            <Link to={`/details/${element.cca3}`} state={{ country: element }} key={idx} className='link'>
+                                <Card className={darkMode ? 'bg-light h-100' : 'bg-dark h-100'}>
+                                    {/* <Container className='img-container'> */}
                                     <Card.Img variant="top" className='img' src={element.flags.png} />
-                                </Link>
-                                {/* </Container> */}
-                                <Card.Body>
-                                    <Card.Title>{element.name.common}</Card.Title>
-                                    <Card.Text>
-                                        <strong>Population: </strong>{element.population.toLocaleString()}
-                                    </Card.Text>
-                                    <Card.Text>
-                                        <strong>Region: </strong>{element.region}
-                                    </Card.Text>
-                                    <Card.Text>
-                                        <strong>Capital: </strong>{element.capital}
-                                    </Card.Text>
-                                </Card.Body>
-                            </Card>
+                                    {/* </Container> */}
+                                    <Card.Body>
+                                        <Card.Title>{element.name.common}</Card.Title>
+                                        <Card.Text>
+                                            <strong>Population: </strong>{element.population.toLocaleString()}
+                                        </Card.Text>
+                                        <Card.Text>
+                                            <strong>Region: </strong>{element.region}
+                                        </Card.Text>
+                                        <Card.Text>
+                                            <strong>Capital: </strong>{element.capital}
+                                        </Card.Text>
+                                    </Card.Body>
+                                </Card>
+                            </Link>
+
                         </Col>
                     ))}
                 </Row>

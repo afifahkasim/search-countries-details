@@ -293,6 +293,28 @@ p {}
   box-shadow: 6px 6px 3px rgba(0, 0, 0, 0.15);
 }
 
+.card-container .card {
+  transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12), .3s opacity;
+  cursor: pointer;
+}
+
+.card-container .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+    opacity: 0.8;
+}
+
+.link {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.link:hover {
+  color: inherit;
+  text-decoration: inherit;
+  opacity: inherit;
+}
+
 .card.bg-dark {
   background-color: var(--dark-mode-elements) !important;
   transition: background .15s ease-in-out;
